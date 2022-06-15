@@ -1,4 +1,4 @@
-# SwagFlix-client# 
+# SwagFlix-client
 ## **About the Project**
 For this project I will be using React to build the client-side for my application called SwagFlix based on its server-side code (REST API and database).
 ### **Built with:**
