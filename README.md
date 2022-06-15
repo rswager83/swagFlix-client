@@ -19,4 +19,4 @@ If you have any suggestion at all that would make this remotely better, then ple
 ### **Contact**
 Please feel free to contact me and offer any type of advice. As I begin my journey through web develeopment, I am always open to advice and helpful ways to accomplish whatever task given to me. Please feel free to reach out to me!
 - Ryan Swager - nanswaglen83@gmail.com
-- Project Link -https://github.com/rswager83/swagflix-client.git
+- Project Link - https://github.com/rswager83/swagFlix-client.git
