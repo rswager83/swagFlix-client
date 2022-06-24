@@ -1,0 +1,39 @@
+
+
+.card-body {
+  background-color: #1ba098;
+  padding-top: 5px;
+}
+
+.btn.btn-link {
+  color: #deb992;
+  float: left;
+  font-weight: 500;
+}
+
+.movie-poster {
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+
+
+
+
+html {
+  background-color: #051622;
+  font-size: 1.3rem;
+}
+
+.app-container {
+  color: #deb992;
+  background-color: #051622;
+}
+
+.btn.btn-primary {
+  background-color: #1ba098;
+}
+
+/*# sourceMappingURL=index.27d8da6b.css.map */
