@@ -5,6 +5,7 @@ For this project I will be using React to build the client-side for my applicati
 ***The project was created by using the following:***
 - React
   - Parcel
+  - Bootstrap
 - SASS
 
 ### **Contributing**
