@@ -1,32 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Card, Row, Col, Container } from "react-bootstrap";
+import { Button, Card, Row, Col, Figure } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
 
 import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
-      <Container>
-        <Row>
-          <Col></Col>
-          <Col>
-            <Card style={{ width: "20rem" }} className="my-3">
-              <Card.Img variant="top" src={movie.ImagePath} />
-              <Card.Body>
-                <Card.Title>{movie.Title}</Card.Title>
-                <Card.Text>{movie.Description}</Card.Text>
-                <Button onClick={() => onMovieClick(movie)} variant="link">
-                  Open
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col></Col>
-        </Row>
-      </Container>
+      <Card className="movie-card my-3">
+        <Card.Body>
+          <Row>
+            <Col xs={12}>
+              <Figure>
+                <Figure.Image variant="top" src={movie.ImagePath} />
+                <Figure>
+                  <Figure.Caption>{movie.Title}</Figure.Caption>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button className="m" variant="link">
+                      Open
+                    </Button>
+                  </Link>
+                </Figure>
+                {/* <Button
+                  className="btn-fav ml-5"
+                  onClick={() => this.addToFavorites(movie._id)}
+                >
+                  Add to Favorites
+                </Button> */}
+              </Figure>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     );
   }
 }
@@ -47,5 +56,4 @@ MovieCard.propTypes = {
       Death: PropTypes.string,
     }),
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };
