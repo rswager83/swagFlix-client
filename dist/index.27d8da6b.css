@@ -6,9 +6,35 @@
 }
 
 .btn.btn-link {
-  color: #deb992;
-  float: left;
+  color: #fff;
   font-weight: 500;
+}
+
+.fav-movie {
+  margin-bottom: 20px;
+}
+
+.fav-movie figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.fav-movie figure img {
+  height: 300px;
+  margin: auto;
+  display: block;
+}
+
+.fav-movie figure figcaption {
+  text-align: center;
+}
+
+.card {
+  margin-bottom: 20px;
 }
 
 .movie-poster {
@@ -20,7 +46,43 @@
 
 
 
+.main-nav {
+  background-color: #1ba098;
+}
 
+.nav-link {
+  color: #fff;
+}
+
+
+
+
+
+
+
+.card-body figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-body figure img {
+  height: 400px;
+  margin: auto;
+  display: block;
+}
+
+.card-body figure figcaption {
+  text-align: center;
+  color: #fff;
+}
+
+.card-body figure .btn-link {
+  margin-top: 20px;
+}
 
 html {
   background-color: #051622;
@@ -28,7 +90,7 @@ html {
 }
 
 .app-container {
-  color: #deb992;
+  color: #fff;
   background-color: #051622;
 }
 
