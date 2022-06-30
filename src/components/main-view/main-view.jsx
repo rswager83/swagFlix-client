@@ -65,7 +65,7 @@ export class MainView extends React.Component {
     return (
       <Router>
         <Menu user={user} />
-        <Container>
+        <Container fluid>
           <Row className="main-view justify-content-md-center">
             <Route
               exact
@@ -100,7 +100,7 @@ export class MainView extends React.Component {
               }}
             />
             <Route
-              path="/movies/:movieID"
+              path="/movies/:movieId"
               render={({ match, history }) => {
                 if (!user)
                   return (
@@ -111,7 +111,7 @@ export class MainView extends React.Component {
                 return (
                   <Col md={8}>
                     <MovieView
-                      movie={movies.find((m) => m._id === match.params.movieID)}
+                      movie={movies.find((m) => m._id === match.params.movieId)}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -169,11 +169,12 @@ export class MainView extends React.Component {
             />
             <Route
               path={`/users/${user}`}
-              render={({ history }) => {
+              render={({ history, match }) => {
                 if (!user)
                   return (
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   );
+                if (movies.length === 0) return <div className="main-view" />;
                 return (
                   <Col>
                     <ProfileView
@@ -185,13 +186,14 @@ export class MainView extends React.Component {
                 );
               }}
             />
+
             <Route
-              path={`/user-update/${user}`}
+              path={`/users/user-update/${user}`}
               render={({ history }) => {
                 if (!user) return <Redirect to="/" />;
                 return (
                   <Col>
-                    <UserUpdate
+                    <UpdateUser
                       user={user}
                       onBackClick={() => history.goBack()}
                     />
