@@ -1,39 +1,59 @@
 import React from "react";
+import { Button, Card } from "react-bootstrap/";
 import PropTypes from "prop-types";
-import { Button, Card, Row, Col, Figure } from "react-bootstrap";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
+  addMovie(movie, user) {
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    console.log(movie);
+    console.log(token);
+
+    axios
+      .post(
+        `https://swagflix.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        this.setState({
+          user: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
-    const { movie } = this.props;
+    const { movie, user } = this.props;
 
     return (
-      <Card className="movie-card my-3">
+      <Card id="movie-card">
+        <Link to={`/movies/${movie._id}`}>
+          <Card.Img variant="top" src={movie.ImagePath} />
+        </Link>
         <Card.Body>
-          <Row>
-            <Col xs={12}>
-              <Figure>
-                <Figure.Image variant="top" src={movie.ImagePath} />
-                <Figure>
-                  <Figure.Caption>{movie.Title}</Figure.Caption>
-                  <Link to={`/movies/${movie._id}`}>
-                    <Button className="m" variant="link">
-                      Open
-                    </Button>
-                  </Link>
-                </Figure>
-                {/* <Button
-                  className="btn-fav ml-5"
-                  onClick={() => this.addToFavorites(movie._id)}
-                >
-                  Add to Favorites
-                </Button> */}
-              </Figure>
-            </Col>
-          </Row>
+          <Card.Title id="card-title">{movie.Title}</Card.Title>
+
+          <Link to={`/movies/${movie._id}`}>
+            <Button className="button" size="sm">
+              Open
+            </Button>
+          </Link>
+          <Button
+            className="button ml-2"
+            size="sm"
+            onClick={() => {
+              this.addMovie(movie, user);
+            }}
+          >
+            Add
+          </Button>
         </Card.Body>
       </Card>
     );
