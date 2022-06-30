@@ -39,7 +39,6 @@
 
 .movie-poster {
   justify-content: center;
-  margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
 }
@@ -48,6 +47,8 @@
 
 .main-nav {
   background-color: #1ba098;
+  margin-bottom: 60px;
+  padding: 0;
 }
 
 .nav-link {
