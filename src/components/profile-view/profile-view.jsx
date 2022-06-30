@@ -1,141 +1,156 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import Link from "react-router-dom";
 
 import "./profile-view.scss";
-// import { UserInfo } from "./user-info";
-import { FavoriteMovieView } from "./favorite-movies";
-// import { UpdateUser } from "./update-user";
+// import { FavoriteMoviesView } from "./favorite-movies";
 
-import { Container, Col, Row, Button, Card } from "react-bootstrap";
+import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
 
 export function ProfileView(props) {
-  const [user, setUser] = useState("");
-  const [movies, setMovies] = useState("");
-  const currentUser = localStorage.getItem("user");
-  const token = localStorage.getItem("token");
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [favoriteMovies, setFavoriteMovies] = useState({});
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
 
-  const getUser = () => {
+  const [user, setUserData] = useState("");
+  const [movies, setMovies] = useState([]);
+  const User = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+  const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
+
+  const getUserData = () => {
+    let user = localStorage.getItem("user");
+    let token = localStorage.getItem("token");
     axios
       .get(`https://swagflix.herokuapp.com/users/${user}`, {
-        headers: { Authorization: `Bearer $(token)` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setUser(response.data);
-        setFavoriteMovies(response.data.FavoriteMovies);
+        setUsername(response.data.Username);
+        setEmail(response.data.Email);
+        setUserData(response.data);
+
+        console.log(response.data);
       })
       .catch((error) => console.error(error));
   };
 
+  // Delete Profile
   const handleDelete = (e) => {
+    const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
     axios.delete(`https://swagflix.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer $(token)` },
+      headers: { Authorization: `Bearer ${token}` },
     });
     alert(`The account ${user.Username} was successfully deleted.`);
     localStorage.clear();
     window.open("/register", "_self");
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const Username = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
+  // Update Profile
+  const handleUpdate = () => {
+    let user = localStorage.getItem("user");
+    let token = localStorage.getItem("token");
 
     axios
       .put(
         `https://swagflix.herokuapp.com/users/${user}`,
         {
-          Username: this.state.Username,
-          Password: this.state.Password,
-          Email: this.state.Email,
-          Birthday: this.state.Birthday,
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
         },
         {
-          headers: { Authorization: `Bearer $(token)` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-        });
 
-        localStorage.setItem("user", this.state.Username);
-        alert("Profile has been updated!");
+      .then((response) => {
+        alert("Your profile has been updated");
+        localStorage.setItem("user", response.data.Username),
+          console.log(response.data);
+        window.open("/", "_self");
+      })
+      .catch((e) => {
+        console.log("Error");
       });
   };
 
   useEffect(() => {
-    getUser(token);
+    getUserData(token);
   }, []);
 
   return (
     <Container>
       <Row>
-        <Col xs={12} sm={4}>
-          <Card>
-            <Card.Body>
-              {/* <UserInfo name={user.Username} email={user.Email} /> */}
-              <Button onClick={handleDelete}>Delete Profile</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8}>
-          <Card>
-            <Card.Body>
-              {/* <UpdateUser
-                handleSubmit={handleSubmit}
-                handleUpdate={handleUpdate}
-              /> */}
-            </Card.Body>
-          </Card>
-        </Col>
+        <h3>Profile</h3>
       </Row>
-      <FavoriteMovieView
-        movies={movies}
-        favoriteMovies={favoriteMovies}
-        currentUser={currentUser}
-        token={token}
-      />
+      <Form>
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            placeholder="username"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            value={password}
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Enter new email"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="birthday">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            onChange={(e) => setBirthday(e.target.value)}
+            value={birthday}
+            type="date"
+            placeholder="birthday"
+          />
+        </Form.Group>
+      </Form>
+      <Button className="mt-2" onClick={handleUpdate}>
+        Update your profile
+      </Button>
+      <Button className="mt-2 ml-4" onClick={handleDelete}>
+        Delete your profile
+      </Button>
 
-      {/* <FavoriteMovieView favoriteMovieList={favoriteMovieList} /> */}
+      <Card className="text-center mt-4" text="dark">
+        <Card.Title>Favorite Movies:</Card.Title>
+        <Card.Body>
+          {favoriteMoviesList.map((movie) => {
+            return (
+              <div key={movie._id}>
+                <img src={movie.ImagePath} />
+                <Link to={`/movies/${movie._id}`}>
+                  <h4>{movie.Title}</h4>
+                </Link>
+              </div>
+            );
+          })}
+        </Card.Body>
+      </Card>
     </Container>
   );
 }
-
-/* <Row>
-        <Col className="label">Username</Col>
-        <Col className="value">{user.Username}</Col>
-      </Row>
-      <Row>
-        <Col className="label">Password</Col>
-        <Col className="value">{user.Password}</Col>
-      </Row>
-      <Row>
-        <Col className="label">Email</Col>
-        <Col className="value">{user.Email}</Col>
-      </Row>
-      <Row>
-        <Col className="label">Birthday</Col>
-        <Col className="value">{user.Birthday}</Col>
-      </Row>
-      <Row>
-        <FavoriteMovieView
-          movies={movies}
-          favoriteMovies={favoriteMovies}
-          currentUser={currentUser}
-          token={token}
-        ></FavoriteMovieView>
-      </Row>
-      <Button onClick={handleDelete}>Delete Profile</Button>
-    </Container> */
 
 ProfileView.propTypes = {
   profileView: PropTypes.shape({
