@@ -1,0 +1,102 @@
+.card-body figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-body figure img {
+  height: 400px;
+  margin: auto;
+  display: block;
+}
+
+.card-body figure figcaption {
+  text-align: center;
+  color: #fff;
+}
+
+.card-body figure .btn-link {
+  margin-top: 20px;
+}
+
+
+
+.card-body {
+  background-color: #1ba098;
+  padding-top: 5px;
+}
+
+.btn.btn-link {
+  color: #fff;
+  font-weight: 500;
+}
+
+.fav-movie {
+  margin-bottom: 20px;
+}
+
+.fav-movie figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.fav-movie figure img {
+  height: 300px;
+  margin: auto;
+  display: block;
+}
+
+.fav-movie figure figcaption {
+  text-align: center;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.movie-poster {
+  justify-content: center;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+
+
+.main-nav {
+  background-color: #1ba098;
+  margin-bottom: 60px;
+  padding: 0;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+
+
+
+
+
+
+html {
+  background-color: #051622;
+  font-size: 1.3rem;
+}
+
+.app-container {
+  color: #fff;
+  background-color: #051622;
+}
+
+.btn.btn-primary {
+  background-color: #1ba098;
+}
+
+/*# sourceMappingURL=index.83325510.css.map */
