@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import Link from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./profile-view.scss";
-// import { FavoriteMoviesView } from "./favorite-movies";
 
 import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
 
@@ -32,8 +31,15 @@ export function ProfileView(props) {
         setUsername(response.data.Username);
         setEmail(response.data.Email);
         setUserData(response.data);
+        setFavoriteMoviesList(response.data.FavoriteMovies);
+        console.log(response);
 
-        console.log(response.data);
+        favoriteMoviesList.forEach((movie_id) => {
+          let favMovies = props.movies.filter(
+            (movie) => movie._id === movie_id
+          );
+          setMovies(favMovies);
+        });
       })
       .catch((error) => console.error(error));
   };
@@ -132,20 +138,17 @@ export function ProfileView(props) {
       <Button className="mt-2 ml-4" onClick={handleDelete}>
         Delete your profile
       </Button>
-
       <Card className="text-center mt-4" text="dark">
         <Card.Title>Favorite Movies:</Card.Title>
         <Card.Body>
-          {favoriteMoviesList.map((movie) => {
-            return (
-              <div key={movie._id}>
-                <img src={movie.ImagePath} />
-                <Link to={`/movies/${movie._id}`}>
-                  <h4>{movie.Title}</h4>
-                </Link>
-              </div>
-            );
-          })}
+          {favoriteMoviesList.map(({ Title, _id, ImagePath }) => (
+            <div key={_id}>
+              <img src={ImagePath} alt={Title} />
+              <Link to={`/movies/${_id}`}>
+                <h4>{Title}</h4>
+              </Link>
+            </div>
+          ))}
         </Card.Body>
       </Card>
     </Container>
