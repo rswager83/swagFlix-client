@@ -37,15 +37,15 @@ export class MovieCard extends React.Component {
         <Link to={`/movies/${movie._id}`}>
           <Card.Img variant="top" src={movie.ImagePath} />
         </Link>
-        <Card.Body>
-          {/* <Card.Title id="card-title">{movie.Title}</Card.Title> */}
+        {/* <Card.Body> */}
+        {/* <Card.Title id="card-title">{movie.Title}</Card.Title> */}
 
-          <Link to={`/movies/${movie._id}`}>
+        {/* <Link to={`/movies/${movie._id}`}>
             <Button className="button" size="sm">
               Open
-            </Button>
-          </Link>
-          <Button
+            </Button> */}
+        {/* </Link> */}
+        {/* <Button
             className="button ml-2"
             size="sm"
             onClick={() => {
@@ -54,7 +54,7 @@ export class MovieCard extends React.Component {
           >
             Add
           </Button>
-        </Card.Body>
+        </Card.Body> */}
       </Card>
     );
   }
