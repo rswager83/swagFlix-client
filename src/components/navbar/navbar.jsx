@@ -4,7 +4,7 @@ import { Container, Navbar, Nav, Button } from "react-bootstrap";
 
 import "./navbar.scss";
 
-export function Menu({ user }) {
+export function Navbar({ user }) {
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
@@ -32,6 +32,7 @@ export function Menu({ user }) {
           {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
 
           {isAuth() && <Button onClick={onLoggedOut}>Logout</Button>}
+          {isAuth() && <Nav.Link href="/">Home</Nav.Link>}
           {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
           {!isAuth() && <Nav.Link href="/register">Sign-up</Nav.Link>}
         </Nav>

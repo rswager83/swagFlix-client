@@ -24,6 +24,31 @@
 
 
 
+.movie-poster {
+  justify-content: center;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+
+
+.main-nav {
+  color: #000;
+  background-color: #1ba098;
+  margin-bottom: 60px;
+  padding: 0;
+}
+
+.nav-link, a.nav-link {
+  color: #fff;
+}
+
+
+
+
+
+
+
 .card-body {
   background-color: #1ba098;
   padding-top: 5px;
@@ -60,30 +85,6 @@
 .card {
   margin-bottom: 20px;
 }
-
-.movie-poster {
-  justify-content: center;
-  margin-bottom: 15px;
-  display: flex;
-}
-
-
-
-.main-nav {
-  background-color: #1ba098;
-  margin-bottom: 60px;
-  padding: 0;
-}
-
-.nav-link {
-  color: #fff;
-}
-
-
-
-
-
-
 
 html {
   background-color: #051622;

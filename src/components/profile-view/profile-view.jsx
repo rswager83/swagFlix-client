@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { SET_USERS } from "../../actions/actions";
 
 import "./profile-view.scss";
 
 import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
+import { connect } from "react-redux";
 
 export function ProfileView(props) {
   const [username, setUsername] = useState("");
