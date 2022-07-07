@@ -1,20 +1,4 @@
-
-.card-body {
-    background-color: #1ba098;
-    padding-top: 5px;
-
-
-}
-
-.btn.btn-link {
-    color: white;
-    font-weight: 500;
-     
-
-}
-
-.fav-movie{
-    margin-bottom: 20px;
+.card-body{
     figure {
         position: relative;
         overflow: hidden;
@@ -24,16 +8,17 @@
         width: 100%;
         img{
             display:block;
-            height: 300px;
+            height: 400px;
             margin:auto;
         }
         figcaption{
             text-align: center;
+            color: white;
+        }
+        .btn-link{
+            margin-top: 20px;
+            
         }
        
     }
-}
-
-.card{
-    margin-bottom: 20px;
 }

@@ -1,3 +1,27 @@
+.card-body figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-body figure img {
+  height: 400px;
+  margin: auto;
+  display: block;
+}
+
+.card-body figure figcaption {
+  text-align: center;
+  color: #fff;
+}
+
+.card-body figure .btn-link {
+  margin-top: 20px;
+}
+
 
 
 .card-body {
@@ -61,30 +85,6 @@
 
 
 
-.card-body figure {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  margin: auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-body figure img {
-  height: 400px;
-  margin: auto;
-  display: block;
-}
-
-.card-body figure figcaption {
-  text-align: center;
-  color: #fff;
-}
-
-.card-body figure .btn-link {
-  margin-top: 20px;
-}
-
 html {
   background-color: #051622;
   font-size: 1.3rem;
@@ -99,4 +99,4 @@ html {
   background-color: #1ba098;
 }
 
-/*# sourceMappingURL=index.27d8da6b.css.map */
+/*# sourceMappingURL=index.83325510.css.map */
