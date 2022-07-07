@@ -1,31 +1,32 @@
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
-
+import { connect } from "react-redux";
+import { setMovies, setUser } from "../../actions/actions";
+import MoviesList from "../movies-list/movies-list";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
-import { Menu } from "../navbar/navbar";
+import { Navbar } from "../navbar/navbar";
 import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
 import { Row, Col, Container } from "react-bootstrap";
 
 import "./main-view.scss";
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
       user: null,
-      selectedMovie: null, //
+      movies: [],
     };
   }
 
   componentDidMount() {
+    const user = localStorage.getItem("user");
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
       this.setState({ user: localStorage.getItem("user") });
@@ -39,32 +40,36 @@ export class MainView extends React.Component {
       })
       .then((response) => {
         // Assign the result to the state
+
         this.setState({
-          movies: response.data,
+          movies: response.data, //
         });
       })
+
       .catch((error) => {
         console.log(error);
       });
   }
 
-  onLoggedIn(authData) {
+  onLoggedIn = (authData) => {
     console.log(authData);
     this.setState({
-      user: authData.user.Username,
+      user: authData.user.username,
     });
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
-  }
+  };
 
   render() {
-    const { movies, user } = this.state;
+    let { movies } = this.state;
+    let { user } = this.state;
+    console.log("I think I'm logged in");
 
     return (
       <Router>
-        <Menu user={user} />
+        <Navbar user={user} />
         <Container fluid>
           <Row className="main-view justify-content-md-center">
             <Route
@@ -72,20 +77,20 @@ export class MainView extends React.Component {
               path="/"
               render={() => {
                 // If there is no user, the loginview is rendered. If there is a user logged in, the user details are passed as a prop to the loginview.
-                if (!user)
-                  return (
-                    <Col>
-                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                    </Col>
-                  );
+                if (!user) return;
+                <Col>
+                  <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                </Col>;
+
                 // Before the movies have been loaded
                 if (movies.length === 0) return <div className="main-view" />;
 
-                return movies.map((m) => (
-                  <Col md={3} key={m._id}>
-                    <MovieCard movie={m} />
-                  </Col>
-                ));
+                return <MoviesList movies={movies} />;
+                // return movies.map((m) => (
+                //   <Col md={3} key={m._id}>
+                //     <MovieCard movie={m} />
+                //   </Col>
+                // ));
               }}
             />
             <Route
@@ -208,20 +213,22 @@ export class MainView extends React.Component {
   }
 }
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-      Death: PropTypes.string,
-    }),
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
+let mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    user: state.user,
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => {
+      dispatch(setUser(user));
+    },
+    setMovies: (movies) => {
+      dispatch(setMovies(movies));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
