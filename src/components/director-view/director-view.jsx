@@ -10,7 +10,7 @@ export class DirectorView extends React.Component {
     const { director, onBackClick } = this.props;
 
     return (
-      <Container className="director-view">
+      <Container className="director-view mt-4">
         <Row>
           <Col className="label">Director:</Col>
           <Col className="value">{director.Name}</Col>
@@ -29,7 +29,7 @@ export class DirectorView extends React.Component {
         </Row>
 
         <Button
-          className="mt-4"
+          className="mt-5"
           onClick={() => {
             onBackClick(null);
           }}
