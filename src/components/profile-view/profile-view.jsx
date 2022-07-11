@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+
 import "./profile-view.scss";
 
 import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
 
-export function ProfileView(props) {
+function ProfileView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [favoriteMovies, setFavoriteMovies] = useState({});
@@ -165,6 +167,14 @@ ProfileView.propTypes = {
     Birthday: PropTypes.string,
   }),
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProfileView);
 
 // import React, { useEffect, useState } from "react";
 // import PropTypes from "prop-types";
