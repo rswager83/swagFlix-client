@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import ProfileView from "../profile-view/profile-view";
 import { LoginView } from "../login-view/login-view";
-// import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { Navbar } from "../navbar/navbar";
@@ -23,7 +22,7 @@ class MainView extends React.Component {
     super();
     this.state = {
       user: null,
-      // movies: [] //
+      movies: [],
     };
   }
 
@@ -40,11 +39,9 @@ class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        this.props.setMovies; //
-        // Assign the result to the state
-        // this.setState({  //
-        //   movies: response.data,  //
-        // });
+        this.setState({
+          movies: response.data,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -64,7 +61,7 @@ class MainView extends React.Component {
 
   render() {
     let { user } = this.state;
-    let { movies } = this.props;
+    let { movies } = this.state;
     console.log("MainView render");
 
     return (
@@ -84,15 +81,8 @@ class MainView extends React.Component {
                     </Col>
                   );
                 // Before the movies have been loaded
-                if (movies.length === 0) return;
-                <div className="main-view" />;
-                return;
-                <MoviesList movies={movies} />; //
-                // return movies.map((m) => (
-                //   <Col md={3} key={m._id}>
-                //     <MovieCard movie={m} />
-                //   </Col>
-                // ));
+                console.log(movies.length);
+                return <MoviesList movies={movies} />;
               }}
             />
             <Route
