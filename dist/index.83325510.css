@@ -1,25 +1,10 @@
-.card-body figure {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  margin: auto;
-  position: relative;
-  overflow: hidden;
+.main-view h4 {
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
-.card-body figure img {
-  height: 400px;
-  margin: auto;
-  display: block;
-}
-
-.card-body figure figcaption {
-  text-align: center;
-  color: #fff;
-}
-
-.card-body figure .btn-link {
-  margin-top: 20px;
+.main-view .fav-list.card {
+  border: none;
 }
 
 
@@ -46,11 +31,14 @@
 
 
 
-
-
 .card-body {
-  background-color: #1ba098;
+  background-color: #051622;
+  border: none;
   padding-top: 5px;
+}
+
+.card-body .card-img {
+  width: 300px;
 }
 
 .btn.btn-link {
@@ -84,6 +72,8 @@
 .card {
   margin-bottom: 20px;
 }
+
+
 
 html {
   background-color: #051622;
