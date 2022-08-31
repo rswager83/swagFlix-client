@@ -35,6 +35,7 @@ can learn more about movies I’ve watched or am interested in.
 - React
   - Parcel
   - Bootstrap
+  - Redux
 - SASS
 
 ## Contributing
