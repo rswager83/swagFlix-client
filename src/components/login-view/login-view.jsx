@@ -3,11 +3,15 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
 
+import { connect } from "react-redux";
+import { setUsers } from "../../actions/actions";
+
 import "./login-view.scss";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
 
@@ -93,4 +97,10 @@ LoginView.propTypes = {
     password: PropTypes.string.isRequired,
   }),
   onLoggedIn: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
 };
